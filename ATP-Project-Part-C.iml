@@ -23,7 +23,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="ATPProjectJAR" level="project" />
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="ATP-Project-PartB" level="project" />
   </component>
 </module>

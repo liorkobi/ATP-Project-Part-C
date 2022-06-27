@@ -1,6 +1,6 @@
 /* commands(CSS design commands) that I put in "root" will influence the ENTIRE object that uses them   */
 .root{
-    -fx-background-color: black;
+    -fx-background-color: white;
 }
 
 /*  for EACH and every Button I create, the below design will prevail   */
