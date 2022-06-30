@@ -1,0 +1,4 @@
+#Wed Jun 29 19:55:38 IDT 2022
+threadPoolSize=16
+mazeSearchingAlgorithm=BestFirstSearch
+mazeGeneratingAlgorithm=MyMazeGenerator
