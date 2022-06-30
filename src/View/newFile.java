@@ -31,20 +31,27 @@ public class newFile implements Initializable {
     }
     @FXML
     public void generate() {
-        int rows = Integer.valueOf(tfRow.getText());
-        int columns = Integer.valueOf(tfCol.getText());
-        if (MYVM.validateMazeGenerationParams(rows, columns)) {
+        if (tfRow == null || tfCol == null) {
+            MYVM.newGame(10, 10);
+//            st.close();
+        } else {
+            int rows = Integer.valueOf(tfRow.getText());
+            int columns = Integer.valueOf(tfCol.getText());
+            if (MYVM.validateMazeGenerationParams(rows, columns)) {
 //                    btn_generateMaze.setDisable(false);
-                    MYVM.newGame(rows, columns);
-                    st.close();
-                    //mazeDisplayer.audioChooser(1);
-                } else {
-            System.out.println("you suck!");
-                    //showAlert("Aw, man! are you trying to create a negative size maze? we're putting you on Megaseeds... ");
-                }
+                MYVM.newGame(rows, columns);
+                st.close();
+                //mazeDisplayer.audioChooser(1);
+            } else {
+                MYVM.newGame(10, 10);
+                st.close();
+                System.out.println("you suck!");
+                //showAlert("Aw, man! are you trying to create a negative size maze? we're putting you on Megaseeds... ");
+            }
 //            } catch (NumberFormatException e) {
 //                showAlert("Aw, man! are you trying to create a negative size maze? we're putting you on Megaseeds... ");
 //            }
+        }
     }
 
     public void setStage(Stage stage) {
