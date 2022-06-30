@@ -22,7 +22,7 @@
          </font>
       </Button>
       <Button layoutX="132.0" layoutY="206.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="117.0" text="Random Size" />
-      <TextField fx:id="tfRow" layoutX="171.0" layoutY="39.0" prefHeight="25.0" prefWidth="117.0" />
+      <TextField fx:id="tfRow" layoutX="171.0" layoutY="39.0" prefHeight="25.0" prefWidth="117.0"  />
       <TextField fx:id="tfCol" layoutX="181.0" layoutY="79.0" prefHeight="27.0" prefWidth="117.0" />
       <Label layoutX="99.0" layoutY="38.0" text="Rows" textFill="#d922ab">
          <font>
@@ -36,3 +36,15 @@
       </Label>
    </children>
 </AnchorPane>
+
+
+
+
+
+<!--<AnchorPane prefHeight="692.0" prefWidth="600.0" style="-fx-background-image: url(Images/abc.jpeg); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Exit">-->
+<!--<children>-->
+
+<!--   <Button layoutX="64.0" layoutY="289.0" mnemonicParsing="false" onAction="#QUIT" prefHeight="25.0" prefWidth="84.0" text="YES" />-->
+<!--   <Button layoutX="172.0" layoutY="289.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" onAction="#closeButtonAction"  text="NO" />-->
+<!--</children>-->
+<!--</AnchorPane>-->
