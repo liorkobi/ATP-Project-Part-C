@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="791.0" prefWidth="533.0" style="-fx-background-image: url(Images/WEL.jpeg); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Welcome">
    <children>
-      <Button layoutX="267.0" layoutY="554.0" mnemonicParsing="false" onAction="#newGameClicked" prefHeight="71.0" prefWidth="199.0" style="-fx-background-color: #c38246;" text="start">
+      <Button layoutX="267.0" layoutY="554.0" mnemonicParsing="false" onAction="#newGameClicked" prefHeight="71.0" prefWidth="199.0" style="-fx-background-color: #c38246;" stylesheets="@startButton.css" text="start">
          <font>
             <Font name="Stencil" size="45.0" />
          </font>
