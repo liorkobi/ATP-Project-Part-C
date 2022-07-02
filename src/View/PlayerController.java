@@ -37,6 +37,7 @@ public class PlayerController {
         stage.setScene(scene);
         newFile.setMV(MYVM);
         generate = new newFile();
+        MVC.setNF(generate);
         generate.generate();
         System.out.println("genert");
         //stage.show();

@@ -4,6 +4,7 @@ package ViewModel;
 import Model.IModel;
 import Model.MyModel;
 import View.IView;
+import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -11,10 +12,7 @@ import javafx.scene.input.KeyCode;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 public class MyViewModel extends Observable implements Observer{
     IView V;
@@ -23,6 +21,9 @@ public class MyViewModel extends Observable implements Observer{
     int playerPosColIdx;
     public StringProperty spPlayerPosRow = new SimpleStringProperty();
     public StringProperty spPlayerPosCol = new SimpleStringProperty();
+    int[][] emptyM;
+    int Re;
+    int Ce;
 
     public void ab(Observer o){
         this.addObserver(o);
@@ -48,7 +49,6 @@ public class MyViewModel extends Observable implements Observer{
     }
 
     public void newGame(int rows, int columns) {
-        System.out.println("default12");
         M.Ganerate(rows,columns);
     }
 
@@ -57,7 +57,6 @@ public class MyViewModel extends Observable implements Observer{
         String a = (String) arg;
         if (o == M) {
             if (a.equals("generated")) {
-                System.out.println("55555555555");
                 //UPDATE VIEW
                 setChanged();
                 notifyObservers("generated");
@@ -91,9 +90,14 @@ public class MyViewModel extends Observable implements Observer{
     public int getScol() {
         return M.getScol();
     }
+
+
     public void movePlayer(KeyCode direction){
-        System.out.println("movep()myvm");M.movePlayerModelLogic(direction);
+        M.movePlayerModelLogic(direction);
+//        M.movePlayerModelLogicE(direction);
     }
+
+
 
 
     private void updateRowsAndCols(){
@@ -132,4 +136,42 @@ public class MyViewModel extends Observable implements Observer{
     public void stopServers() {
         M.exit();
     }
+
+    public void empty(int i, int i1) {
+        Re=i;
+        Ce=i1;
+        emptyM=new int[i][i1];
+        for (int e=0;e<Re;e++){
+            for (int k=0;k<Ce;k++){
+                emptyM[e][k]=0;
+            }
+            }
+        setChanged();
+        notifyObservers("empty");
+    }
+
+    private int chooseR(int b){
+        Random R = new Random();
+        int frame = R.nextInt(b);
+    return frame;}
+
+
+    public int getSrowE() {
+        return chooseR(Re);
+    }
+    public int getErowE() {
+        return chooseR(Re);
+    }
+    public int getEcolE() {
+        return chooseR(Ce);
+    }
+    public int getScolE() {
+        return chooseR(Ce);
+    }
+
+    public int[][] getMazeE() {
+        return emptyM;
+    }
+
+
 }

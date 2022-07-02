@@ -15,7 +15,12 @@ public class Properties implements Initializable {
     Stage stage;
     public ChoiceBox<String> searchingAlgorithm;
     public ChoiceBox<String> generator;
+    public newFile newfile;
 
+
+    public void setNF(newFile newfile) {
+        this.newfile = newfile;
+    }
 
     public void setStage(Stage stage) {
         this.stage=stage;
@@ -34,10 +39,10 @@ public class Properties implements Initializable {
             String a2= properties.getval("mazeGeneratingAlgorithm");
             if(a1.equals("BestFirstSearch")){
                 searchingAlgorithm.setValue("BestFirstSearch");}
-            else if(a1.equals("DepthFirstSearch")){
-                searchingAlgorithm.setValue("DepthFirstSearch");}
-            else if(a1.equals("BreadthFirstSearch")){
-                searchingAlgorithm.setValue("BreadthFirstSearch");}
+            else if(a1.equals("DFS")){
+                searchingAlgorithm.setValue("DFS");}
+            else if(a1.equals("Breadth")){
+                searchingAlgorithm.setValue("Breadth");}
             if(a2.equals("MyMazeGenerator")){
                 generator.setValue("MyMazeGenerator");}
             else if(a2.equals("SimpleMazeGenerator")){
@@ -52,11 +57,20 @@ public class Properties implements Initializable {
 
 
 
-    public void UpdateClicked(){
+    public void UpdateClicked() throws Exception {
+
         Configurations properties = Configurations.getInstance();
         properties.setProperty("mazeGeneratingAlgorithm",generator.getValue());
         properties.setProperty("mazeSearchingAlgorithm",searchingAlgorithm.getValue());
         System.out.println("updated");
+        if (generator.getValue().equals("EmptyMazeGenerator")){
+            newFile.empty=true;
+
+        }
+        else{
+            newFile.empty=false;
+    }
+        newfile.generate();
         stage.close();
     }
 }

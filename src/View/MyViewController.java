@@ -31,10 +31,17 @@ public class MyViewController  implements IView , Observer {
    MyViewModel MYVM;
     Scene scene;
     Stage stage;
+    newFile newfile;
+    public boolean empty;
     @FXML
     public Pane pane;
+
     public StringProperty playerPosRow = new SimpleStringProperty();
     public StringProperty playerPosCol = new SimpleStringProperty();
+    @FXML
+    public javafx.scene.control.Label lbl_playerRow;
+    @FXML
+    public javafx.scene.control.Label lbl_playerColumn;
 
 
     public void setScene(Scene scene) {
@@ -68,18 +75,7 @@ public class MyViewController  implements IView , Observer {
         void Exit(ActionEvent event) throws IOException {
             stopServers();
             System.exit(0);
-//                Stage stage = new Stage();
-//                stage.setTitle("Exit");
-//                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/Exit.fxml"));
-//                Parent root = fxmlLoader.load();
-//                Exit ctrl=  fxmlLoader.getController();
-//                ctrl.setST(stage);
-//                Scene scene = new Scene(root, 350, 448);
-//                stage.setScene(scene);
-////                ctrl.setScene(scene);
-//
-//                stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
-//                stage.show();
+
         }
 
 
@@ -88,10 +84,11 @@ public class MyViewController  implements IView , Observer {
         void newfile(ActionEvent event) throws IOException {
 //            newFile.setMV(MYVM);
             Stage stage = new Stage();
-            stage.setTitle("Properties");
+            stage.setTitle("NewFile");
             FXMLLoader newFXML = new FXMLLoader(getClass().getResource("/View/newfile.fxml"));
             Parent root = newFXML.load();
             newFile newController = newFXML.getController();
+            newfile=newController;
             newController.setStage(stage);
             Scene scene = new Scene(root, 350, 350);
             stage.setScene(scene);
@@ -121,22 +118,28 @@ public class MyViewController  implements IView , Observer {
            String a=(String)arg;
         if (o == MYVM) {
             if (a.equals("generated")) {
-                System.out.println("hfgdjhg");
                 MazeDisplayer.setCol_player(MYVM.getScol());
                 MazeDisplayer.setRow_player(MYVM.getSrow());
                 MazeDisplayer.placeEr(MYVM.getErow());
                 MazeDisplayer.placeEc(MYVM.getEcol());
                 MazeDisplayer.drawm(MYVM.getMaze());
-                System.out.println("1111111111111");
+                bindProperties(MYVM);
+                this.playerPosRow.set(MYVM.getPlayerPosRowIdx() + "");
+                this.playerPosCol.set(MYVM.getPlayerPosColIdx() + "");
+
             }if(arg.equals("playerMove")){
                 MazeDisplayer.setCol_player(MYVM.getPlayerPosColIdx());
                 MazeDisplayer.setRow_player(MYVM.getPlayerPosRowIdx());
 //                System.out.println(">>>");
                 MazeDisplayer.draw();
+                bindProperties(MYVM);
+
             }
             if ((arg.equals("solved"))) {
                 MazeDisplayer.setSolutionObj(MYVM.getSolution());
                 MazeDisplayer.drawSolution();
+                bindProperties(MYVM);
+
             } if ((arg.equals("loaded"))){
                 MazeDisplayer.placeEr(MYVM.getErow());
                 MazeDisplayer.placeEc(MYVM.getEcol());
@@ -145,38 +148,27 @@ public class MyViewController  implements IView , Observer {
                 MazeDisplayer.drawm(MYVM.getMaze());
                 //bindProperties(viewModel);
             }
+            if (a.equals("empty")) {
+                MazeDisplayer.setCol_player(MYVM.getScolE());
+                MazeDisplayer.setRow_player(MYVM.getSrowE());
+                MazeDisplayer.placeEr(MYVM.getErowE());
+                MazeDisplayer.placeEc(MYVM.getEcolE());
+                MazeDisplayer.drawm(MYVM.getMazeE());
+                bindProperties(MYVM);
+                this.playerPosRow.set(MYVM.getPlayerPosRowIdx() + "");
+                this.playerPosCol.set(MYVM.getPlayerPosColIdx() + "");
+
+            }
+
         }
     }
 
-
-
-    //    public void Display(int [][] maze){
-//        System.out.println("D??????????");
-//
-//        //Scene sc=new Scene(stage.getScene().getRoot(),700,700);
-//       // this.stage.setScene(MD);
-//
-//
-//    }
 public void KeyPressed(KeyEvent keyEvent) {
 //    MazeDisplayer.requestFocus();
     System.out.println("keypressd");
     MYVM.movePlayer(keyEvent.getCode());
     keyEvent.consume();
 }
-
-//    @Override
-//    public void Load() throws IOException, ClassNotFoundException {
-//        FileChooser fileChooser = new FileChooser();
-//        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-//        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Maze Files", "*.maze"));
-//        File loadFile = fileChooser.showOpenDialog(stage);
-//        if (loadFile != null) {
-//            MYVM.loadGame(loadFile);
-////            MazeDisplayer.audioChooser(1);
-//        } else {
-//        }
-//    }
 
     public void setStage(Stage primaryStage) {
             stage=primaryStage;
@@ -227,6 +219,7 @@ public void savefile(ActionEvent e) throws IOException{
         Parent root = propFXML.load();
         Properties propController = propFXML.getController();
         propController.setStage(stage);
+        propController.setNF(newfile);
         Scene scene = new Scene(root, 500, 450);
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -249,6 +242,16 @@ public void savefile(ActionEvent e) throws IOException{
     public void setPlayerAcordingToUserChoise(String s) throws Exception {
         MazeDisplayer.getUserChoiceOfPlayer(s);
 
+    }
+    public void updateProp() throws Exception {
+//        MazeDisplayer.setCol_player(MYVM.getScol());
+//        MazeDisplayer.setRow_player(MYVM.getSrow());
+//        MazeDisplayer.placeEr(MYVM.getErow());
+//        MazeDisplayer.placeEc(MYVM.getEcol());
+//        MazeDisplayer.drawm(MYVM.getMaze());
+//        bindProperties(MYVM);
+//        this.playerPosRow.set(MYVM.getPlayerPosRowIdx() + "");
+//        this.playerPosCol.set(MYVM.getPlayerPosColIdx() + "");
     }
     public void stopServers(){
             MYVM.stopServers();
@@ -301,6 +304,21 @@ public void savefile(ActionEvent e) throws IOException{
             MazeDisplayer.getTransforms().add(newScale);
             scroll.consume();
         }
+    }
+
+    private void bindProperties(MyViewModel viewModel) {
+        lbl_playerRow.textProperty().bind(viewModel.spPlayerPosRow);
+        lbl_playerColumn.textProperty().bind(viewModel.spPlayerPosCol);
+    }
+    public String getPlayerPosRow() {
+        return playerPosRow.get();
+    }
+    public String getPlayerPosCol() {
+        return playerPosCol.get();
+    }
+
+    public void setNF(newFile generate) {
+            this.newfile=generate;
     }
 }
 
