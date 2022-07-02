@@ -13,6 +13,7 @@ import algorithms.search.*;
 import javafx.scene.input.KeyCode;
 
 
+
 import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -32,7 +33,8 @@ public class MyModel extends Observable implements IModel {
 
     int playerRowIdx = 1;
     int playerColIdx = 1;
-
+    int EmptyRow;
+    int EmptyCol;
     private Server generatorServer;
     private Server solverServer;
     private boolean serversOn = false;
@@ -46,6 +48,12 @@ public class MyModel extends Observable implements IModel {
 
     public int getPlayerRowIdx() {
         return playerRowIdx;
+    }
+
+    @Override
+    public void setemptyM(int r, int c) {
+        EmptyRow = r;
+        EmptyCol = c;
     }
 
     public void setPlayerRowIdx(int playerRowIdx) {
@@ -265,37 +273,48 @@ public class MyModel extends Observable implements IModel {
             /*----------------------90 degrees moves---------------------*/
             case UP:
             case NUMPAD8:
-                if ()
+                if(playerRowIdx >= 1)
                     playerRowIdx--;
                 break;
             case DOWN:
             case NUMPAD2:
+                if(playerRowIdx+1 < EmptyRow)
                     playerRowIdx++;
                 break;
             case RIGHT:
             case NUMPAD6:
+                if(playerColIdx+1 <EmptyCol)
                     playerColIdx++;
                 break;
             case LEFT:
             case NUMPAD4:
+                if(playerColIdx>=1)
                     playerColIdx--;
                 break;
             /*----------------------diagonal moves---------------------*/
             case NUMPAD1:
-                        playerColIdx--;
-                        playerRowIdx++;
+                if(playerColIdx >= 1 && playerRowIdx + 1 < EmptyRow) {
+                    playerColIdx--;
+                    playerRowIdx++;
+                }
                 break;
             case NUMPAD3:
-                        playerColIdx++;
-                        playerRowIdx++;
+                if(playerColIdx + 1 < EmptyCol && playerRowIdx +1 < EmptyRow) {
+                playerColIdx++;
+                playerRowIdx++;
+            }
                 break;
             case NUMPAD9:
-                        playerColIdx++;
-                        playerRowIdx--;
+                if(playerColIdx +1 < EmptyCol && playerRowIdx >= 1) {
+                    playerColIdx++;
+                    playerRowIdx--;
+                }
                 break;
             case NUMPAD7:
-                        playerColIdx--;
-                        playerRowIdx--;
+                if(playerColIdx >=1 && playerRowIdx >= 1) {
+                    playerColIdx--;
+                    playerRowIdx--;
+                }
                 break;
         }
 
