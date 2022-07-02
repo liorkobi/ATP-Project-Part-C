@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <?import View.MazeDisplayer?>
 
-<BorderPane onKeyPressed="#KeyPressed" prefHeight="685.0" prefWidth="767.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
+<BorderPane onKeyPressed="#KeyPressed" onScroll="#setOnScroll" prefHeight="685.0" prefWidth="767.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
     <center>
-        <Pane fx:id="pane" style="-fx-background-image: url(Images/screen12.jpg); -fx-background-size: cover;" BorderPane.alignment="CENTER">
+        <Pane fx:id="pane"  style="-fx-background-image: url(Images/b1.jpeg); -fx-background-size: cover;" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
             </BorderPane.margin>
             <children>
-                <MazeDisplayer   fx:id="MazeDisplayer" height="400.0" imageFileNamePlayer="src/Images/screen1.jpg" imageFileNameExit="src/Images/endP.jpeg"
- imageFileNameWall="src/Images/cookiee.jpeg" imageFileNameWIN="src/Images/win.jpeg" imageFileNameSolution = "src/Images/cookie1.jpg" width="600.0" BorderPane.alignment="CENTER" onMouseClicked="#mouseClicked" />
+                <MazeDisplayer   fx:id="MazeDisplayer" height="400.0" imageFileNameExit="src/Images/endP.jpeg"
+     imageFileNameWall="src/Images/wall2.PNG"  imageFileNameWIN="src/Images/win.jpeg" imageFileNameSolution = "src/Images/win.png" TsoliderIMG="src/Images/NTTsolider.jpeg" SsoliderIMG="src/Images/Sbrown.jpeg" CsoliderIMG="src/Images/Cbrown.jpeg" blackIMG="src/Images/blackbrown.jpeg" dollIMG="src/Images/dollbrown.jpeg" width="600.0" BorderPane.alignment="CENTER" onMouseClicked="#mouseClicked" onMouseDragged="#mouseDragged"/>
                             </children>
                             <padding>
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -31,13 +33,13 @@
                                 <Menu mnemonicParsing="false" text="File">
                                     <items>
                                         <MenuItem mnemonicParsing="false" onAction="#newfile" text="New" />
-                                        <MenuItem mnemonicParsing="false" onAction="#savefile" text="Save"  />
+                                        <MenuItem mnemonicParsing="false" onAction="#savefile" text="Save" />
                                         <MenuItem mnemonicParsing="false" onAction="#loadfile" text="Load" />
                                     </items>
                                 </Menu>
                                 <Menu mnemonicParsing="false" text="Options">
                                     <items>
-                                        <MenuItem mnemonicParsing="false" onAction="#properties" text="Properties" />
+                                        <MenuItem mnemonicParsing="false" onAction="#Properties" text="Properties" />
                                     </items>
                                 </Menu>
                                 <Menu mnemonicParsing="false" onAction="#Exit" text="Exit">
@@ -59,6 +61,12 @@
                         </MenuBar>
                 </top>
    <bottom>
-      <Button fx:id="solve" mnemonicParsing="false" onAction="#solveMaze" text="solve" BorderPane.alignment="CENTER" />
+      <Button fx:id="solve" mnemonicParsing="false" onAction="#solveMaze" style="-fx-background-color: transparent; -fx-cursor: hover;" stylesheets="@ViewStyle.css" text="solve" textFill="#441ec7f7" underline="true" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Stencil" size="33.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
    </bottom>
                 </BorderPane>

@@ -36,5 +36,6 @@ public void solveMaze();
     void save(File file);
 
     void loadGame(File loadfile) throws IOException, ClassNotFoundException;
+    void exit();
 //    public void loadMaze(File file);
 }

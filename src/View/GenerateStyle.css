@@ -1,13 +1,16 @@
 /* commands(CSS design commands) that I put in "root" will influence the ENTIRE object that uses them   */
-
+.root{
+    -fx-background-image: url("Images/screen12.jpg");
+}
 
 /*  for EACH and every Button I create, the below design will prevail   */
 Button {
-    -fx-text-fill: darkblue;
+    -fx-text-fill: darkgray;
     -fx-font-family: "Stencil";
-    -fx-font-size: 33px;
+    -fx-font-size: 24px;
     -fx-font-weight: bold;
     -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-background-color: #C81D49;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 

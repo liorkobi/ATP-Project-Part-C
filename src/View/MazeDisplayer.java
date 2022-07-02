@@ -1,8 +1,5 @@
 package View;
 //
-import algorithms.mazeGenerators.Position;
-import algorithms.search.AState;
-import algorithms.search.MazeState;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.Scene;
@@ -10,59 +7,129 @@ import javafx.scene.canvas.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class MazeDisplayer extends Canvas {
+
     private int row_player =0;
     private int col_player =0;
     private int[][] maze;
 
     StringProperty imageFileNameWall = new SimpleStringProperty();
-    StringProperty imageFileNamePlayer = new SimpleStringProperty();
+//    StringProperty imageFileNamePlayer = new SimpleStringProperty();
     StringProperty imageFileNameExit = new SimpleStringProperty();
     StringProperty imageFileNameWIN = new SimpleStringProperty();
     StringProperty imageFileNameSolution = new SimpleStringProperty();
+
+
+
+    public String getTsoliderIMG() {
+        return TsoliderIMG.get();
+    }
+
+    public String getSsoliderIMG() {
+        return SsoliderIMG.get();
+    }
+
+    public String getCsoliderIMG() {
+        return CsoliderIMG.get();
+    }
+
+
+    public String getBlackIMG() {
+        return blackIMG.get();
+    }
+
+
+
+    public String getDollIMG() {
+        return dollIMG.get();
+    }
+
+    public void setTsoliderIMG(String tsoliderIMG) {
+        this.TsoliderIMG.set(tsoliderIMG);
+    }
+
+    public void setSsoliderIMG(String ssoliderIMG) {
+        this.SsoliderIMG.set(ssoliderIMG);
+    }
+
+    public void setCsoliderIMG(String csoliderIMG) {
+        this.CsoliderIMG.set(csoliderIMG);
+    }
+
+    public void setBlackIMG(String blackIMG) {
+        this.blackIMG.set(blackIMG);
+    }
+
+    public void setDollIMG(String dollIMG) {
+        this.dollIMG.set(dollIMG);
+    }
+
+    StringProperty TsoliderIMG = new SimpleStringProperty();
+    StringProperty SsoliderIMG = new SimpleStringProperty();
+    StringProperty CsoliderIMG = new SimpleStringProperty();
+    StringProperty blackIMG = new SimpleStringProperty();
+    StringProperty dollIMG = new SimpleStringProperty();
+    Image playerImage;
 
     private int row_exit;
     private int col_exit;
     ArrayList<int[]> Sol;
 
+    public MazeDisplayer() {
+    widthProperty().addListener(e -> draw());
+    heightProperty().addListener(e -> draw());
+    }
+
+    //WIN IMAGE
     public String getImageFileNameWIN() {
         return imageFileNameWIN.get();
     }
+    public void setImageFileNameWIN(String imageFileNameWIN) { this.imageFileNameWIN.set(imageFileNameWIN);}
 
-    public void setImageFileNameWIN(String imageFileNameWIN) {
-        this.imageFileNameWIN.set(imageFileNameWIN);
-    }
+    //CIRCLE SOLIDER PLAYER
+//    public String getblackIMG() { return imageFileNameBlack.get(); }
+//    public void setblackIMG(String blackIMG) { this.imageFileNameBlack.set(blackIMG);}
 
+    //BLACK IMAGE
+//    public String getCsoliderIMG() { return CsoliderIMG.get(); }
+//    public void setCsoliderIMG(String CsoliderIMG) { this.CsoliderIMG.set(CsoliderIMG);}
+//
+//    //SQUARE SOLIDER PLAYER
+//    public String getSsoliderIMG() { return SsoliderIMG.get(); }
+//    public void setSsoliderIMG(String SsoliderIMG) { this.SsoliderIMG.set(SsoliderIMG);}
 
-    public String getImageFileNameWall() {
-        return imageFileNameWall.get();
-    }
-    public String getImageFileNameSolution() {
-        return imageFileNameSolution.get();
-    }
+    //DOLL IMAGE
+//    public String getdollIMG() { return dollIMG.get(); }
+//    public void setdollIMG(String dollIMG) { this. dollIMG.set(dollIMG);}
+//
+//    //TRIANGLE SOLIDER PLAYER
+//    public String getTsoliderIMG() { return  TsoliderIMG.get(); }
+//    public void setTsoliderIMG(String TsoliderIMG) { this.TsoliderIMG.set(TsoliderIMG); }
 
+    //WALL IMAGE
+    public String getImageFileNameWall() { return imageFileNameWall.get(); }
     public void setImageFileNameWall(String imageFileNameWall) {
         this.imageFileNameWall.set(imageFileNameWall);
     }
-    public void setImageFileNameSolution(String imageFileNameSolution) {
-        this.imageFileNameSolution.set(imageFileNameSolution);
-    }
 
-    public String getImageFileNamePlayer() {
-        return imageFileNamePlayer.get();
-    }
 
-    public void setImageFileNamePlayer(String imageFileNameExit) {
-        this.imageFileNamePlayer.set(imageFileNameExit);
-    }
+    //SOLUTION IMAGE
+    public String getImageFileNameSolution() { return imageFileNameSolution.get(); }
+    public void setImageFileNameSolution(String imageFileNameSolution) { this.imageFileNameSolution.set(imageFileNameSolution); }
+
+//    public String getImageFileNamePlayer() {
+//        return imageFileNamePlayer.get();
+//    }
+//
+//    public void setImageFileNamePlayer(String imageFileNameExit) {
+//        this.imageFileNamePlayer.set(imageFileNameExit);
+//    }
     public String getImageFileNameExit() {
         return imageFileNameExit.get();
     }
@@ -118,12 +185,12 @@ public void draw()
 //place the player
         double h_player = getRow_player() * cellHeight;
         double w_player = getCol_player() * cellWidth;
-        Image playerImage = null;
-        try {
-            playerImage = new Image(new FileInputStream(getImageFileNamePlayer()));
-        } catch (FileNotFoundException e) {
-            System.out.println("There is no Image player....");
-        }
+//        Image playerImage = null;
+//        try {
+//            playerImage = new Image(new FileInputStream(getImageFileNamePlayer()));
+//        } catch (FileNotFoundException e) {
+//            System.out.println("There is no Image player....");
+//        }
         graphicsContext.drawImage(playerImage,w_player,h_player,cellWidth,cellHeight);
         if (getRow_player() == getRow_exit() && getCol_player() == getCol_exit()) {
             showStageForUserWinningTheGame("You Are The Winner");
@@ -256,12 +323,12 @@ public void draw()
             //place the player
             double h_player = getRow_player() * cellHeight;
             double w_player = getCol_player() * cellWidth;
-            Image playerImage = null;
-            try {
-                playerImage = new Image(new FileInputStream(getImageFileNamePlayer()));
-            } catch (FileNotFoundException e) {
-                System.out.println("There is no Image player....");
-            }
+//            Image playerImage = null;
+//            try {
+//                playerImage = new Image(new FileInputStream(getImageFileNamePlayer()));
+//            } catch (FileNotFoundException e) {
+//                System.out.println("There is no Image player....");
+//            }
             graphicsContext.drawImage(playerImage,w_player,h_player,cellWidth,cellHeight);
             if (getRow_player() == getRow_exit() && getCol_player() == getCol_exit()) {
                 showStageForUserWinningTheGame("You Are The Winner");
@@ -285,9 +352,42 @@ public void draw()
         Sol = null;
     }
 
+//    public ResizableCanvas() {
+//        // Redraw canvas when size changes.
+//        widthProperty().addListener(evt -> draw());
+//        heightProperty().addListener(evt -> draw());
+//    }
+    @Override
+    public boolean isResizable() {
+        return true;
+    }
 
+    @Override
+    public double prefWidth(double height) {
+        return getWidth();
+    }
 
-}
+    @Override
+    public double prefHeight(double width) {
+        return getHeight();
+    }
+
+    public void getUserChoiceOfPlayer(String s) throws Exception {
+//        playerImage=null;
+        //brown background
+            if (s.equals("Tsolider"))
+                playerImage = new Image(new FileInputStream(TsoliderIMG.get()));
+            if (s.equals("Ssolider"))
+                playerImage = new Image(new FileInputStream(SsoliderIMG.get()));
+            if (s.equals("Csolider"))
+                playerImage = new Image(new FileInputStream(CsoliderIMG.get()));
+            if (s.equals("black"))
+                playerImage = new Image(new FileInputStream(blackIMG.get()));
+            if (s.equals("doll"))
+                playerImage = new Image(new FileInputStream(dollIMG.get()));
+        }
+    }
+
 
 
 

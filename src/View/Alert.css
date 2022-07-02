@@ -1,7 +1,3 @@
-/* commands(CSS design commands) that I put in "root" will influence the ENTIRE object that uses them   */
-
-
-/*  for EACH and every Button I create, the below design will prevail   */
 Button {
     -fx-text-fill: darkblue;
     -fx-font-family: "Stencil";
@@ -21,3 +17,11 @@ Button:hover{
     -fx-alignment: CENTER;
     -fx-content-display: LEFT;
 }
+
+
+dialog {
+    -fx-background-image:url("abc.jpg");
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+
+}
+
