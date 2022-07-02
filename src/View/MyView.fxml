@@ -3,70 +3,98 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <?import View.MazeDisplayer?>
 
-<BorderPane onKeyPressed="#KeyPressed" onScroll="#setOnScroll" prefHeight="685.0" prefWidth="767.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
+<BorderPane onKeyPressed="#KeyPressed" onScroll="#setOnScroll" prefHeight="456.0" prefWidth="634.0" style="-fx-background-image: url(Images/MM.jpg); -fx-background-size:100% 100% ;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
     <center>
-        <Pane fx:id="pane"  style="-fx-background-image: url(Images/b1.jpeg); -fx-background-size: cover;" BorderPane.alignment="CENTER">
+        <Pane fx:id="pane" style="-fx-background-image: url(Images/MM.jpg); -fx-background-size: 100% 100% ;" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
             </BorderPane.margin>
             <children>
                 <MazeDisplayer   fx:id="MazeDisplayer" height="400.0" imageFileNameExit="src/Images/endP.jpeg"
-     imageFileNameWall="src/Images/wall2.PNG"  imageFileNameWIN="src/Images/win.jpeg" imageFileNameSolution = "src/Images/win.png" TsoliderIMG="src/Images/NTTsolider.jpeg" SsoliderIMG="src/Images/Sbrown.jpeg" CsoliderIMG="src/Images/Cbrown.jpeg" blackIMG="src/Images/blackbrown.jpeg" dollIMG="src/Images/dollbrown.jpeg" width="600.0" BorderPane.alignment="CENTER" onMouseClicked="#mouseClicked" onMouseDragged="#mouseDragged"/>
-                            </children>
-                            <padding>
-                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                            </padding>
-                        </Pane>
-                    </center>
-                <top>
-                        <MenuBar prefHeight="34.0" prefWidth="700.0">
-                            <menus>
-                                <Menu mnemonicParsing="false" text="File">
-                                    <items>
-                                        <MenuItem mnemonicParsing="false" onAction="#newfile" text="New" />
-                                        <MenuItem mnemonicParsing="false" onAction="#savefile" text="Save" />
-                                        <MenuItem mnemonicParsing="false" onAction="#loadfile" text="Load" />
-                                    </items>
-                                </Menu>
-                                <Menu mnemonicParsing="false" text="Options">
-                                    <items>
-                                        <MenuItem mnemonicParsing="false" onAction="#Properties" text="Properties" />
-                                    </items>
-                                </Menu>
-                                <Menu mnemonicParsing="false" onAction="#Exit" text="Exit">
-                               <items>
-                                  <MenuItem mnemonicParsing="false" onAction="#Exit" text="Quit Game" />
-                               </items>
-                            </Menu>
-                                <Menu mnemonicParsing="false" onAction="#Help" text="Help">
-                               <items>
-                                  <MenuItem mnemonicParsing="false" onAction="#Help" text="Instactions" />
-                               </items>
-                            </Menu>
-                                <Menu mnemonicParsing="false" text="About">
-                                    <items>
-                                        <MenuItem mnemonicParsing="false" onAction="#About" text="info" />
-                                    </items>
-                            </Menu>
-                            </menus>
-                        </MenuBar>
-                </top>
-   <bottom>
-      <Button fx:id="solve" mnemonicParsing="false" onAction="#solveMaze" style="-fx-background-color: transparent; -fx-cursor: hover;" stylesheets="@ViewStyle.css" text="solve" textFill="#441ec7f7" underline="true" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="Stencil" size="33.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-   </bottom>
-                </BorderPane>
+                                 imageFileNameWall="src/Images/I2.jpg"  imageFileNameWIN="src/Images/win.jpeg"
+                                 imageFileNameSolution = "src/Images/win.png" TsoliderIMG="src/Images/NTTsolider.jpeg"
+                                 SsoliderIMG="src/Images/Sbrown.jpeg" CsoliderIMG="src/Images/CHAR2.png"
+                                 blackIMG="src/Images/blackbrown.jpeg" dollIMG="src/Images/dollbrown.jpeg"
+                                 width="600.0" BorderPane.alignment="CENTER" onMouseClicked="#mouseClicked" onMouseDragged="#mouseDragged"/>
+            </children>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+        </Pane>
+    </center>
+    <top>
+        <MenuBar prefHeight="34.0" prefWidth="700.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#newfile" text="New" />
+                        <MenuItem mnemonicParsing="false" onAction="#savefile" text="Save" />
+                        <MenuItem mnemonicParsing="false" onAction="#loadfile" text="Load" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Options">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#Properties" text="Properties" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" onAction="#Exit" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#Exit" text="Quit Game" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" onAction="#Help" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#Help" text="Instactions" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="About">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#About" text="info" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+             <Label text="Player row:" textFill="#5c0a0a" />
+             <Label layoutX="-2.0" layoutY="36.0" text="Player column:" textFill="#821010" />
+             <Label fx:id="lbl_playerRow" layoutX="89.0" layoutY="36.0" prefHeight="17.0" prefWidth="21.0" text="#" textFill="#c93a3a" />
+             <Label fx:id="lbl_playerColumn" layoutX="96.0" layoutY="5.0" text="#" textFill="#690d0d" />
+
+             <Button fx:id="solve" layoutX="37.0" layoutY="78.0" mnemonicParsing="false" onAction="#solveMaze" style="-fx-background-color: transparent; -fx-cursor: hover;" stylesheets="@ViewStyle.css" text="solve" textFill="#441ec7f7" underline="true">
+                  <font>
+                      <Font name="Stencil" size="33.0" />
+                  </font>
+                  <cursor>
+                      <Cursor fx:constant="HAND" />
+                  </cursor>
+            </Button>
+            <ImageView fitHeight="286.0" fitWidth="199.0" layoutX="2.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/tt1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="412.0" fitWidth="150.0" layoutX="21.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/pp.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+</BorderPane>

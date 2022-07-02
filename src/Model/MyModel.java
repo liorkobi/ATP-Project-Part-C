@@ -29,6 +29,7 @@ public class MyModel extends Observable implements IModel {
     Maze maze;
     Solution solution;
 
+
     int playerRowIdx = 1;
     int playerColIdx = 1;
 
@@ -252,6 +253,49 @@ public class MyModel extends Observable implements IModel {
                         playerRowIdx--;
                     }
                 }
+                break;
+        }
+
+        setChanged();
+        notifyObservers("playerMove");
+
+    }
+    public void movePlayerModelLogicE(KeyCode direction) {
+        switch (direction) {
+            /*----------------------90 degrees moves---------------------*/
+            case UP:
+            case NUMPAD8:
+                if ()
+                    playerRowIdx--;
+                break;
+            case DOWN:
+            case NUMPAD2:
+                    playerRowIdx++;
+                break;
+            case RIGHT:
+            case NUMPAD6:
+                    playerColIdx++;
+                break;
+            case LEFT:
+            case NUMPAD4:
+                    playerColIdx--;
+                break;
+            /*----------------------diagonal moves---------------------*/
+            case NUMPAD1:
+                        playerColIdx--;
+                        playerRowIdx++;
+                break;
+            case NUMPAD3:
+                        playerColIdx++;
+                        playerRowIdx++;
+                break;
+            case NUMPAD9:
+                        playerColIdx++;
+                        playerRowIdx--;
+                break;
+            case NUMPAD7:
+                        playerColIdx--;
+                        playerRowIdx--;
                 break;
         }
 
