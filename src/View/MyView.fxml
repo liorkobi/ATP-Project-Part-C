@@ -16,7 +16,7 @@
 
 <?import View.MazeDisplayer?>
 
-<BorderPane onKeyPressed="#KeyPressed" onScroll="#setOnScroll" prefHeight="456.0" prefWidth="634.0" style="-fx-background-image: url(Images/MM.jpg); -fx-background-size:100% 100% ;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
+<BorderPane onKeyPressed="#KeyPressed" onScroll="#setOnScroll" prefHeight="456.0" prefWidth="634.0" style="-fx-background-image: url(Images/MM.jpg); -fx-background-size:100% 100% ;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
     <center>
         <Pane fx:id="pane" style="-fx-background-image: url(Images/MM.jpg); -fx-background-size: 100% 100% ;" BorderPane.alignment="CENTER">
             <BorderPane.margin>
@@ -71,12 +71,24 @@
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-             <Label text="Player row:" textFill="#5c0a0a" />
-             <Label layoutX="-2.0" layoutY="36.0" text="Player column:" textFill="#821010" />
-             <Label fx:id="lbl_playerRow" layoutX="89.0" layoutY="36.0" prefHeight="17.0" prefWidth="21.0" text="#" textFill="#c93a3a" />
-             <Label fx:id="lbl_playerColumn" layoutX="96.0" layoutY="5.0" text="#" textFill="#690d0d" />
+             <Label layoutX="3.0" text="Player row:">
+               <font>
+                  <Font name="Stencil" size="18.0" />
+               </font></Label>
+             <Label layoutX="2.0" layoutY="36.0" text="Player column:">
+               <font>
+                  <Font name="Stencil" size="18.0" />
+               </font></Label>
+             <Label fx:id="lbl_playerRow" layoutX="171.0" layoutY="34.0" prefHeight="17.0" prefWidth="21.0" text="#">
+               <font>
+                  <Font name="Stencil" size="20.0" />
+               </font></Label>
+             <Label fx:id="lbl_playerColumn" layoutX="139.0" layoutY="-4.0" text="#">
+               <font>
+                  <Font name="Stencil" size="20.0" />
+               </font></Label>
 
-             <Button fx:id="solve" layoutX="37.0" layoutY="78.0" mnemonicParsing="false" onAction="#solveMaze" style="-fx-background-color: transparent; -fx-cursor: hover;" stylesheets="@ViewStyle.css" text="solve" textFill="#441ec7f7" underline="true">
+             <Button fx:id="solve" layoutX="-19.0" layoutY="58.0" mnemonicParsing="false" onAction="#solveMaze" style="-fx-background-color: transparent; -fx-cursor: hover;" stylesheets="@ViewStyle.css" text="solve" textFill="#441ec7f7" underline="true">
                   <font>
                       <Font name="Stencil" size="33.0" />
                   </font>
@@ -86,10 +98,10 @@
             </Button>
             <ImageView fitHeight="286.0" fitWidth="199.0" layoutX="2.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Images/tt1.png" />
+                  <Image url="@../Images/logoo.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="412.0" fitWidth="150.0" layoutX="21.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="412.0" fitWidth="150.0" layoutX="26.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/pp.png" />
                </image>

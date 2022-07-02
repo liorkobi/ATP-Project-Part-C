@@ -15,9 +15,9 @@
 <!--</children>-->
 <!--</AnchorPane>-->
 
-<AnchorPane prefHeight="279.0" prefWidth="370.0" style="-fx-background-image: url(Images/new.jpg); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.newFile">
+<AnchorPane prefHeight="279.0" prefWidth="370.0" style="-fx-background-image: url(Images/b2.jpeg); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.newFile">
    <children>
-      <Button layoutX="54.0" layoutY="133.0" mnemonicParsing="false" onAction="#generate" prefHeight="53.0" prefWidth="254.0" style="-fx-background-color: #C81D49;" stylesheets="@GenerateStyle.css" text="Ganerate Maze">
+      <Button layoutX="-9.0" layoutY="147.0" mnemonicParsing="false" onAction="#generate" prefHeight="62.0" prefWidth="380.0" style="-fx-background-color: transparent;" stylesheets="@ViewStyle.css" text="Ganerate Maze" underline="true">
          <effect>
             <Glow level="0.53" />
          </effect>
@@ -28,14 +28,14 @@
             <Font name="Stencil" size="24.0" />
          </font>
       </Button>
-      <TextField fx:id="tfRow" layoutX="181.0" layoutY="39.0" prefHeight="25.0" prefWidth="117.0" />
-      <TextField fx:id="tfCol" layoutX="181.0" layoutY="79.0" prefHeight="27.0" prefWidth="117.0" />
-      <Label layoutX="99.0" layoutY="38.0" text="Rows" textFill="#c81d49">
+      <TextField fx:id="tfRow" layoutX="181.0" layoutY="27.0" prefHeight="25.0" prefWidth="117.0" />
+      <TextField fx:id="tfCol" layoutX="181.0" layoutY="72.0" prefHeight="27.0" prefWidth="117.0" />
+      <Label layoutX="96.0" layoutY="26.0" text="Rows" textFill="#000000">
          <font>
             <Font name="Stencil" size="22.0" />
          </font>
       </Label>
-      <Label layoutX="77.0" layoutY="79.0" text="Columns" textFill="#c81d49">
+      <Label layoutX="77.0" layoutY="72.0" text="Columns" textFill="#000000">
          <font>
             <Font name="Stencil" size="22.0" />
          </font>

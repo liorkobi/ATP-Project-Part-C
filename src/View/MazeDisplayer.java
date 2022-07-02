@@ -1,16 +1,21 @@
 package View;
 //
+import ViewModel.MyViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MazeDisplayer extends Canvas {
@@ -18,6 +23,7 @@ public class MazeDisplayer extends Canvas {
     private int row_player =0;
     private int col_player =0;
     private int[][] maze;
+    public MyViewModel MYVM;
 
     StringProperty imageFileNameWall = new SimpleStringProperty();
 //    StringProperty imageFileNamePlayer = new SimpleStringProperty();
@@ -244,31 +250,50 @@ public void draw()
     }
 
     private void showStageForUserWinningTheGame(String alertMessage) {
-        try {
-            Pane pane = new Pane();
-            Stage newStage = new Stage();
-            newStage.setTitle("winners");
-            Image WIN=null;
-            try {
-                WIN = new Image(new FileInputStream(getImageFileNameWIN()));
-            } catch (FileNotFoundException e) {
-                System.out.println("There is no Image WIN....");
-            }
-            ImageView imageviewUserWonScene = new ImageView(WIN);
-            /* add ImageView to Pane's children */
-            pane.getChildren().add(imageviewUserWonScene);
-            Scene scene = new Scene(pane);
-            newStage.setScene(scene);
-            /* show the UserWon scene */
-            newStage.show();
-            /* play the UserWon Audio */
-//            audioChooser(2);
-            /* if user presses the exit window button then stop the music from playing*/
-//            newStage.setOnCloseRequest( event ->  mediaPlayer.stop() );//Sets the value of the property onCloseRequest
+        try{
+        Stage stage = new Stage();
+        stage.setTitle("Winner");
+        FXMLLoader winFXML = new FXMLLoader(getClass().getResource("/View/Win.fxml"));
+        Parent root = winFXML.load();
+        WinController winController = winFXML.getController();
+//            newfile=newController;
+        winController.setMYVM(MYVM);
+        winController.setStage(stage);
+        Scene scene = new Scene(root, 700, 700);
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+////
+//        try {
+//            Pane pane = new Pane();
+//            Stage newStage = new Stage();
+//            newStage.setTitle("winners");
+//            Image WIN = null;
+//            try {
+//                WIN = new Image(new FileInputStream(getImageFileNameWIN()));
+//            } catch (FileNotFoundException e) {
+//                System.out.println("There is no Image WIN....");
+//            }
+//            ImageView imageviewUserWonScene = new ImageView(WIN);
+//            /* add ImageView to Pane's children */
+//            pane.getChildren().add(imageviewUserWonScene);
+//            Scene scene = new Scene(pane);
+//            newStage.setScene(scene);
+//            /* show the UserWon scene */
+//            newStage.show();
+//            /* play the UserWon Audio */
+////            audioChooser(2);
+//            /* if user presses the exit window button then stop the music from playing*/
+////            newStage.setOnCloseRequest( event ->  mediaPlayer.stop() );//Sets the value of the property onCloseRequest
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
 
 
     public void setSolutionObj(ArrayList<int[]> solution) {
@@ -386,7 +411,11 @@ public void draw()
             if (s.equals("doll"))
                 playerImage = new Image(new FileInputStream(dollIMG.get()));
         }
+
+    public void setMYVM(MyViewModel myvm) {
+        this.MYVM = myvm;
     }
+}
 
 
 

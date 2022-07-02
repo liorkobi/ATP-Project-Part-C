@@ -118,6 +118,7 @@ public class MyViewController  implements IView , Observer {
            String a=(String)arg;
         if (o == MYVM) {
             if (a.equals("generated")) {
+                MazeDisplayer.setMYVM(MYVM);
                 MazeDisplayer.setCol_player(MYVM.getScol());
                 MazeDisplayer.setRow_player(MYVM.getSrow());
                 MazeDisplayer.placeEr(MYVM.getErow());

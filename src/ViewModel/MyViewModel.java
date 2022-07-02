@@ -22,6 +22,7 @@ public class MyViewModel extends Observable implements Observer{
     public StringProperty spPlayerPosRow = new SimpleStringProperty();
     public StringProperty spPlayerPosCol = new SimpleStringProperty();
     int[][] emptyM;
+    public static boolean empty;
     int Re;
     int Ce;
 
@@ -30,6 +31,7 @@ public class MyViewModel extends Observable implements Observer{
     }
 
     public MyViewModel(IModel m) {
+        empty = false;
         M = m;
         M.ab(this);
     }
@@ -93,8 +95,14 @@ public class MyViewModel extends Observable implements Observer{
 
 
     public void movePlayer(KeyCode direction){
-        M.movePlayerModelLogic(direction);
-//        M.movePlayerModelLogicE(direction);
+        if(empty){
+            M.setemptyM(emptyM.length, emptyM[0].length);
+            M.movePlayerModelLogicE(direction);
+        }else{
+            M.movePlayerModelLogic(direction);
+
+        }
+//
     }
 
 
@@ -138,6 +146,7 @@ public class MyViewModel extends Observable implements Observer{
     }
 
     public void empty(int i, int i1) {
+        empty = true;
         Re=i;
         Ce=i1;
         emptyM=new int[i][i1];
@@ -172,6 +181,8 @@ public class MyViewModel extends Observable implements Observer{
     public int[][] getMazeE() {
         return emptyM;
     }
+
+
 
 
 }

@@ -22,6 +22,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static java.lang.String.valueOf;
+
 
 public class newFile implements Initializable {
     public Stage st;
@@ -32,34 +34,63 @@ public class newFile implements Initializable {
     public static boolean empty=false;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) { }
+
+    public void generateForUpdate(){
+        if (tfRow == null || tfCol == null) {
+            MYVM.empty(10,10);
+        }
+        else {
+            if (valueOf(tfRow.getText()) == "" || valueOf(tfCol.getText()) == "") {
+                MYVM.empty(10, 10);
+                showAlert("never heard of maze without dimensions,you survived this time");
+            } else {
+                MYVM.empty(Integer.valueOf(tfRow.getText()), Integer.valueOf(tfCol.getText()));
+            }
+        }
+    }
+
     @FXML
     public void generate() {
-        if(empty){
+        if (empty) {
             if (tfRow == null || tfCol == null) {
-                MYVM.empty(10,10);
-            }
-            else {MYVM.empty(Integer.valueOf(tfRow.getText()),Integer.valueOf(tfCol.getText()));}
-            }
-else{
-        if (tfRow == null || tfCol == null) {
-            System.out.println("default");
-            MYVM.newGame(10, 10);
-//            st.close();
-        } else {
-            int rows = Integer.valueOf(tfRow.getText());
-            int columns = Integer.valueOf(tfCol.getText());
-            if (MYVM.validateMazeGenerationParams(rows, columns)) {
-//                    btn_generateMaze.setDisable(false);
-                MYVM.newGame(rows, columns);
+                MYVM.empty(10, 10);
                 st.close();
-                //mazeDisplayer.audioChooser(1);
+            } else { if (valueOf(tfRow.getText()) == "" || valueOf(tfCol.getText()) == "") {
+                MYVM.empty(10, 10);
+                showAlert("never heard of maze without dimensions,you survived this time");
             } else {
+                MYVM.empty(Integer.valueOf(tfRow.getText()), Integer.valueOf(tfCol.getText()));
+            }
+            }
+            st.close();
+        } else {
+            if (tfRow == null || tfCol == null) {
+                System.out.println("default");
                 MYVM.newGame(10, 10);
-                showAlert("Maze is too small you survived this time.confirm and BEWARE");
-                st.close();
+//                st.close();
+            } else {
+                if (valueOf(tfRow.getText()) == "" || valueOf(tfCol.getText()) == "") {
+                    MYVM.newGame(10, 10);
+                    showAlert("never heard of maze without dimensions,you survived this time");
+                    st.close();
+                } else {
+                    int rows = Integer.valueOf(tfRow.getText());
+                    int columns = Integer.valueOf(tfCol.getText());
+                    if (MYVM.validateMazeGenerationParams(rows, columns)) {
+//                    btn_generateMaze.setDisable(false);
+                        MYVM.newGame(rows, columns);
+                        st.close();
+                        //mazeDisplayer.audioChooser(1);
+                    } else {
+                        MYVM.newGame(10, 10);
+                        showAlert("Maze is too small you survived this time.confirm and BEWARE");
+                        st.close();
+                    }
+                }
             }
-            }
-        }}
+        }
+    }
+
 
 
     public void setStage(Stage stage) {

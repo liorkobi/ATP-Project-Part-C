@@ -70,7 +70,7 @@ public class Properties implements Initializable {
         else{
             newFile.empty=false;
     }
-        newfile.generate();
+        newfile.generateForUpdate();
         stage.close();
     }
 }
