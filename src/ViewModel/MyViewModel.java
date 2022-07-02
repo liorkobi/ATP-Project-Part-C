@@ -48,7 +48,8 @@ public class MyViewModel extends Observable implements Observer{
     }
 
     public void newGame(int rows, int columns) {
-       int[][] a=M.Ganerate(rows,columns);
+        System.out.println("default12");
+        M.Ganerate(rows,columns);
     }
 
     @Override
@@ -56,6 +57,7 @@ public class MyViewModel extends Observable implements Observer{
         String a = (String) arg;
         if (o == M) {
             if (a.equals("generated")) {
+                System.out.println("55555555555");
                 //UPDATE VIEW
                 setChanged();
                 notifyObservers("generated");
@@ -125,5 +127,9 @@ public class MyViewModel extends Observable implements Observer{
 
     public void loadGame(File loadFile) throws IOException, ClassNotFoundException {
         M.loadGame(loadFile);
+    }
+
+    public void stopServers() {
+        M.exit();
     }
 }

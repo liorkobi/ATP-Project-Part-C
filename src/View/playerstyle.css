@@ -3,7 +3,7 @@
 
 /*  for EACH and every Button I create, the below design will prevail   */
 Button {
-    -fx-text-fill: darkblue;
+    -fx-text-fill: lightgray;
     -fx-font-family: "Stencil";
     -fx-font-size: 33px;
     -fx-font-weight: bold;

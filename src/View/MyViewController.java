@@ -10,8 +10,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.transform.Scale;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -26,6 +31,8 @@ public class MyViewController  implements IView , Observer {
    MyViewModel MYVM;
     Scene scene;
     Stage stage;
+    @FXML
+    public Pane pane;
     public StringProperty playerPosRow = new SimpleStringProperty();
     public StringProperty playerPosCol = new SimpleStringProperty();
 
@@ -59,19 +66,20 @@ public class MyViewController  implements IView , Observer {
 
         @FXML
         void Exit(ActionEvent event) throws IOException {
-//            System.exit(0);
-                Stage stage = new Stage();
-                stage.setTitle("Exit");
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/Exit.fxml"));
-                Parent root = fxmlLoader.load();
-                Exit ctrl=  fxmlLoader.getController();
-                ctrl.setST(stage);
-                Scene scene = new Scene(root, 350, 448);
-                stage.setScene(scene);
-//                ctrl.setScene(scene);
-
-                stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
-                stage.show();
+            stopServers();
+            System.exit(0);
+//                Stage stage = new Stage();
+//                stage.setTitle("Exit");
+//                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/Exit.fxml"));
+//                Parent root = fxmlLoader.load();
+//                Exit ctrl=  fxmlLoader.getController();
+//                ctrl.setST(stage);
+//                Scene scene = new Scene(root, 350, 448);
+//                stage.setScene(scene);
+////                ctrl.setScene(scene);
+//
+//                stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
+//                stage.show();
         }
 
 
@@ -91,10 +99,7 @@ public class MyViewController  implements IView , Observer {
             stage.show();
         }
 
-        @FXML
-        void properties(ActionEvent event) {
 
-        }
 
         @FXML
         void Help(ActionEvent event) {
@@ -116,12 +121,13 @@ public class MyViewController  implements IView , Observer {
            String a=(String)arg;
         if (o == MYVM) {
             if (a.equals("generated")) {
+                System.out.println("hfgdjhg");
                 MazeDisplayer.setCol_player(MYVM.getScol());
                 MazeDisplayer.setRow_player(MYVM.getSrow());
                 MazeDisplayer.placeEr(MYVM.getErow());
                 MazeDisplayer.placeEc(MYVM.getEcol());
-
                 MazeDisplayer.drawm(MYVM.getMaze());
+                System.out.println("1111111111111");
             }if(arg.equals("playerMove")){
                 MazeDisplayer.setCol_player(MYVM.getPlayerPosColIdx());
                 MazeDisplayer.setRow_player(MYVM.getPlayerPosRowIdx());
@@ -213,8 +219,89 @@ public void savefile(ActionEvent e) throws IOException{
 //        }
     }
 
+    @FXML
+    public void Properties(ActionEvent event) throws Exception {
+        Stage stage = new Stage();
+        stage.setTitle("Properties");
+        FXMLLoader propFXML = new FXMLLoader(getClass().getResource("/View/Properties.fxml"));
+        Parent root = propFXML.load();
+        Properties propController = propFXML.getController();
+        propController.setStage(stage);
+        Scene scene = new Scene(root, 500, 450);
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
+    }
 
 
+    public void setResizeEvent(Scene scene) {
+        MazeDisplayer.widthProperty().bind(pane.widthProperty());
+        MazeDisplayer.heightProperty().bind(pane.heightProperty());
+        scene.widthProperty().addListener((observable, oldValue, newValue) -> {
+            MazeDisplayer.widthProperty().bind(pane.widthProperty());
+        });
+        scene.heightProperty().addListener((observable, oldValue, newValue) -> {
+            MazeDisplayer.heightProperty().bind(pane.heightProperty());
+        });
+    }
+
+
+    public void setPlayerAcordingToUserChoise(String s) throws Exception {
+        MazeDisplayer.getUserChoiceOfPlayer(s);
+
+    }
+    public void stopServers(){
+            MYVM.stopServers();
+    }
+
+    public void mouseDragged(MouseEvent mouseEvent) {
+        if(MYVM.getMaze() != null) {
+            //save the bigger num- rows or columns??
+            int maximumSize = Math.max(MYVM.getMaze()[0].length, MYVM.getMaze().length);
+            //calculate x parameter of mouse - left and write
+            double mousePosX=helperMouseDragged(maximumSize,MazeDisplayer.getHeight(),
+                    MYVM.getMaze().length,mouseEvent.getX(),MazeDisplayer.getWidth() / maximumSize);
+            //calculate y parameter of mouse - up and down
+            double mousePosY=helperMouseDragged(maximumSize,MazeDisplayer.getWidth(),
+                    MYVM.getMaze()[0].length,mouseEvent.getY(),MazeDisplayer.getHeight() / maximumSize);
+            //אם ערך ה-X של העכבר==העמודה של השחקן וה-Y < השורה של השחקן תעלה למעלה
+            if ( mousePosX == MYVM.getPlayerPosColIdx() && mousePosY < MYVM.getPlayerPosRowIdx() )
+                MYVM.movePlayer(KeyCode.NUMPAD8);
+            //אם ערך ה-Y של העכבר==השורה של השחקן וגם ערך ה-X >מהעמודה של השחקן תזוז ימינה
+            else if (mousePosY == MYVM.getPlayerPosRowIdx() && mousePosX > MYVM.getPlayerPosColIdx() )
+                MYVM.movePlayer(KeyCode.NUMPAD6);
+                //אם ערך ה-Y של העכבר==השורה של השחקן וגם ערך ה-X <מהעמודה של השחקן תזוז שמאלה
+            else if ( mousePosY == MYVM.getPlayerPosRowIdx() && mousePosX < MYVM.getPlayerPosColIdx() )
+                MYVM.movePlayer(KeyCode.NUMPAD4);
+                //אם ערך ה-X של העכבר==העמודה של השחקן וגם ערך ה-Y > השורה של השחקן תרד למטה
+            else if (mousePosX == MYVM.getPlayerPosColIdx() && mousePosY > MYVM.getPlayerPosRowIdx()  )
+                MYVM.movePlayer(KeyCode.NUMPAD2);
+
+        }
+    }
+    private  double helperMouseDragged(int maxsize, double canvasSize, int mazeSize,double mouseEvent,double temp){
+        double cellSize=canvasSize/maxsize;
+        double start = (canvasSize / 2 - (cellSize * mazeSize / 2)) / cellSize;
+        double mouse = (int) ((mouseEvent) / (temp) - start);
+        return mouse;
+    }
+
+
+    public void setOnScroll(ScrollEvent scroll) {
+        if (scroll.isControlDown()) {
+            double zoom_fac = 1.05;
+            if (scroll.getDeltaY() < 0) {
+                zoom_fac = 2.0 - zoom_fac;
+            }
+            Scale newScale = new Scale();
+            newScale.setPivotX(scroll.getX());
+            newScale.setPivotY(scroll.getY());
+            newScale.setX(MazeDisplayer.getScaleX() * zoom_fac);
+            newScale.setY(MazeDisplayer.getScaleY() * zoom_fac);
+            MazeDisplayer.getTransforms().add(newScale);
+            scroll.consume();
+        }
+    }
 }
 
 

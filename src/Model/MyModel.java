@@ -179,6 +179,7 @@ public class MyModel extends Observable implements IModel {
           setChanged();//-->hasChanged() will return True
           /* Notify ViewModel */
           notifyObservers("generated");
+        System.out.println("ggggggg");
           return maze.getMaze();
      }
     public int[][] getMazeGrid(){return maze.getMaze();}
@@ -360,13 +361,14 @@ public class MyModel extends Observable implements IModel {
         notifyObservers("loaded");
     }
 
-    }
+
 
 //
-//    public void exit(){
-//        stopServers();
+    public void exit(){
+        stopServers();
 //        threadPool.shutdown();
-//    }
+    }
+}
 
 
 
