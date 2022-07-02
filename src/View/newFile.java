@@ -29,16 +29,20 @@ public class newFile implements Initializable {
     public TextField tfCol;
     public static  MyViewModel MYVM;
     public MazeDisplayer md;
+    public static boolean empty=false;
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-//        IModel model = new MyModel();
-//        MYVM= new MyViewModel(model);
-    }
+    public void initialize(URL url, ResourceBundle resourceBundle) { }
     @FXML
     public void generate() {
+        if(empty){
+            if (tfRow == null || tfCol == null) {
+                MYVM.empty(10,10);
+            }
+            else {MYVM.empty(Integer.valueOf(tfRow.getText()),Integer.valueOf(tfCol.getText()));}
+            }
+else{
         if (tfRow == null || tfCol == null) {
             System.out.println("default");
-
             MYVM.newGame(10, 10);
 //            st.close();
         } else {
@@ -55,7 +59,7 @@ public class newFile implements Initializable {
                 st.close();
             }
             }
-        }
+        }}
 
 
     public void setStage(Stage stage) {

@@ -20,6 +20,7 @@ public interface IModel {
     int getErow();
     int getEcol();
     void movePlayerModelLogic(KeyCode direction);
+//    void movePlayerModelLogicE(KeyCode direction);
     public int getPlayerRowIdx();
 
     public void setPlayerRowIdx(int playerRowIdx);
