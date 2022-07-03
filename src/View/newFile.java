@@ -44,7 +44,7 @@ public class newFile implements Initializable {
                 MYVM.empty(10, 10);
                 showAlert("never heard of maze without dimensions,you survived this time");
             } else {
-                MYVM.empty(Integer.valueOf(tfRow.getText()), Integer.valueOf(tfCol.getText()));
+                MYVM.empty(Integer.parseInt(tfRow.getText()), Integer.parseInt(tfCol.getText()));
             }
         }
     }
@@ -52,41 +52,52 @@ public class newFile implements Initializable {
     @FXML
     public void generate() {
         if (empty) {
-            if (tfRow == null || tfCol == null) {
-                MYVM.empty(10, 10);
-                st.close();
-            } else { if (valueOf(tfRow.getText()) == "" || valueOf(tfCol.getText()) == "") {
-                MYVM.empty(10, 10);
-                showAlert("never heard of maze without dimensions,you survived this time");
-            } else {
-                MYVM.empty(Integer.valueOf(tfRow.getText()), Integer.valueOf(tfCol.getText()));
-            }
-            }
-            st.close();
-        } else {
-            if (tfRow == null || tfCol == null) {
-                System.out.println("default");
-                MYVM.newGame(10, 10);
-//                st.close();
-            } else {
-                if (valueOf(tfRow.getText()) == "" || valueOf(tfCol.getText()) == "") {
-                    MYVM.newGame(10, 10);
-                    showAlert("never heard of maze without dimensions,you survived this time");
+            try {
+                if (tfRow == null || tfCol == null) {
+                    MYVM.empty(10, 10);
                     st.close();
                 } else {
-                    int rows = Integer.valueOf(tfRow.getText());
-                    int columns = Integer.valueOf(tfCol.getText());
-                    if (MYVM.validateMazeGenerationParams(rows, columns)) {
-//                    btn_generateMaze.setDisable(false);
-                        MYVM.newGame(rows, columns);
-                        st.close();
-                        //mazeDisplayer.audioChooser(1);
+                    if (valueOf(tfRow.getText()) == "" || valueOf(tfCol.getText()) == "") {
+                        MYVM.empty(10, 10);
+                        showAlert("never heard of maze without dimensions,you survived this time");
                     } else {
-                        MYVM.newGame(10, 10);
-                        showAlert("Maze is too small you survived this time.confirm and BEWARE");
-                        st.close();
+                        MYVM.empty(Integer.parseInt(tfRow.getText()), Integer.parseInt(tfCol.getText()));
                     }
                 }
+                st.close();
+            } catch (Exception e) {
+                showAlert("you are trying to enter letters as maze dimensions");
+            }
+
+            }else{
+            try{
+                if (tfRow == null || tfCol == null) {
+                    System.out.println("default");
+                    MYVM.newGame(10, 10);
+//                st.close();
+                } else {
+                    if (valueOf(tfRow.getText()) == "" || valueOf(tfCol.getText()) == "") {
+                        MYVM.newGame(10, 10);
+                        showAlert("never heard of maze without dimensions,you survived this time");
+                        st.close();
+                    } else {
+                        int rows = Integer.parseInt(tfRow.getText());
+                        int columns = Integer.parseInt(tfCol.getText());
+                        if (MYVM.validateMazeGenerationParams(rows, columns)) {
+//                    btn_generateMaze.setDisable(false);
+                            MYVM.newGame(rows, columns);
+                            st.close();
+                            //mazeDisplayer.audioChooser(1);
+                        } else {
+                            MYVM.newGame(10, 10);
+                            showAlert("Maze is too small you survived this time.confirm and BEWARE");
+                            st.close();
+                        }
+
+                    }
+                }
+            }catch (Exception e) {
+                showAlert("you are trying to enter letters as maze dimensions");
             }
         }
     }
