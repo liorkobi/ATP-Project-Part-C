@@ -2,24 +2,14 @@ package View;
 
 import Model.MyModel;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-import javafx.stage.WindowEvent;
 
-import java.awt.*;
-import java.beans.EventHandler;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -42,34 +32,6 @@ public class Exit  implements Initializable {
     public void setScene(Scene sc1) {
         this.sc = sc1;
     }
-
-//    public void initialize(URL url, ResourceBundle resourceBundle) {
-////        IModel model = new MyModel();
-////        MYVM= new MyViewModel(model);
-//    }
-
-    //void exit(ActionEvent event) {
-//        try {
-//            Stage stage = new Stage();
-//            stage.setTitle("Exit");
-//            FXMLLoader fxmlLoader = new FXMLLoader();
-//            Parent root = fxmlLoader.load(getClass().getResource("Exit.fxml").openStream());
-//
-//            Scene scene = new Scene(root, 350, 448);
-//
-//            stage.setScene(scene);
-//            stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
-//            //Exit E = fxmlLoader.getController();
-//            //E.init(stage);
-//            Exit ctrl = fxmlLoader.getController();
-//
-//            ctrl.setStage(stage);
-//            ctrl.setScene(scene);
-//            stage.show();
-//        } catch (Exception e) {
-//        }
-
-    //   }
 
 
     @FXML

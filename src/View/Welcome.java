@@ -17,19 +17,18 @@ public class Welcome {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+        MazeDisplayer.audioChooser(3);
+
     }
+
 
     public Stage getPrimaryStage() {
         return stage;
     }
-//    public void setVM(MyViewModel MV){ MYVM=MV;}
 
     @FXML
     public void newGameClicked() throws Exception {
         stage.setScene(scene);
-//        newFile.setMV(MYVM);
-       // generate = new newFile();
-        //generate.generate();
-//     stage.show();
+
     }
 }

@@ -3,6 +3,8 @@ package View;
 import ViewModel.MyViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -36,10 +38,10 @@ public class PlayerController {
     public void PlayerSelected() throws Exception {
         stage.setScene(scene);
         newFile.setMV(MYVM);
-        generate = new newFile();
+      generate=new newFile();
         MVC.setNF(generate);
         generate.generate();
-        System.out.println("genert");
+//        System.out.println("genert");
         //stage.show();
     }
 
@@ -70,8 +72,9 @@ public class PlayerController {
     }
 
     public void doll() throws Exception {
-        PlayerSelected();
         MVC.setPlayerAcordingToUserChoise("doll");
+        PlayerSelected();
+
     }
 }
 

@@ -13,6 +13,13 @@ public class WinController {
     newFile generate;
     MyViewController MVC;
 //    newFile newFile;
+    int r;
+    int c;
+
+
+    public void setd(int a,int b){
+        r=a;c=b;
+    }
 
 
     @FXML
@@ -22,13 +29,17 @@ public class WinController {
         newFile.setMV(MYVM);
         generate = new newFile();
 //        MVC.setNF(generate);
-        generate.generate();
+        MazeDisplayer.win=false;
+        generate.generateForUpdate(r,c);
+//        generate.generate();
         System.out.println("genert");
         stage.close();
 //        stage.show();
     }
     public void setStage(Stage stage) {
         this.stage = stage;
+        MazeDisplayer.audioChooser(3);
+
     }
 
 //    public void setNF(newFile newfile){
