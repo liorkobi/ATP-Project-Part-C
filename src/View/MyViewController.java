@@ -31,8 +31,10 @@ public class MyViewController  implements IView , Observer {
    MyViewModel MYVM;
     Scene scene;
     Stage stage;
-    newFile newfile;
+     newFile newfile;
     public boolean empty;
+    public static boolean mute=false;
+
     @FXML
     public Pane pane;
 
@@ -82,6 +84,7 @@ public class MyViewController  implements IView , Observer {
 
         @FXML
         void newfile(ActionEvent event) throws IOException {
+//            MazeDisplayer.mediaPlayer.stop();
 //            newFile.setMV(MYVM);
             Stage stage = new Stage();
             stage.setTitle("NewFile");
@@ -154,6 +157,9 @@ public class MyViewController  implements IView , Observer {
                 MazeDisplayer.setRow_player(MYVM.getSrowE());
                 MazeDisplayer.placeEr(MYVM.getErowE());
                 MazeDisplayer.placeEc(MYVM.getEcolE());
+                while (MazeDisplayer.getCol_player()==MazeDisplayer.getCol_exit() && MazeDisplayer.getRow_player()==MazeDisplayer.getRow_exit()){
+                    MazeDisplayer.placeEr(MYVM.getErowE());
+                }
                 MazeDisplayer.drawm(MYVM.getMazeE());
                 bindProperties(MYVM);
                 this.playerPosRow.set(MYVM.getPlayerPosRowIdx() + "");
@@ -321,6 +327,16 @@ public void savefile(ActionEvent e) throws IOException{
     public void setNF(newFile generate) {
             this.newfile=generate;
     }
+
+    public  void mute(){
+        if(mute){
+            mute = false;
+        }
+        else{ mute = true;
+        }
+        View.MazeDisplayer.stopMusic();
+    }
+
 }
 
 

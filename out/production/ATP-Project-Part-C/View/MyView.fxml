@@ -16,18 +16,18 @@
 
 <?import View.MazeDisplayer?>
 
-<BorderPane onKeyPressed="#KeyPressed" onScroll="#setOnScroll" prefHeight="456.0" prefWidth="634.0" style="-fx-background-image: url(Images/MM.jpg); -fx-background-size:100% 100% ;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
+<BorderPane onKeyPressed="#KeyPressed" onScroll="#setOnScroll" prefHeight="456.0" prefWidth="634.0" style="-fx-background-image: url(Images/MM.jpg); -fx-background-size:100% 100% ;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
     <center>
         <Pane fx:id="pane" style="-fx-background-image: url(Images/MM.jpg); -fx-background-size: 100% 100% ;" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
             </BorderPane.margin>
             <children>
-                <MazeDisplayer   fx:id="MazeDisplayer" height="400.0" imageFileNameExit="src/Images/endP.jpeg"
-                                 imageFileNameWall="src/Images/I2.jpg"  imageFileNameWIN="src/Images/win.jpeg"
-                                 imageFileNameSolution = "src/Images/win.png" TsoliderIMG="src/Images/NTTsolider.jpeg"
-                                 SsoliderIMG="src/Images/Sbrown.jpeg" CsoliderIMG="src/Images/CHAR2.png"
-                                 blackIMG="src/Images/blackbrown.jpeg" dollIMG="src/Images/dollbrown.jpeg"
+                <MazeDisplayer   fx:id="MazeDisplayer" height="400.0" imageFileNameExit="resources/Images/endP.jpeg"
+                                 imageFileNameWall="resources/Images/I2.jpg"  imageFileNameWIN="resources/Images/win.jpeg"
+                                 imageFileNameSolution = "resources/Images/RUN_.png" TsoliderIMG="resources/Images/charT.png"
+                                 SsoliderIMG="resources/Images/chhar.png" CsoliderIMG="resources/Images/CHAR2.png"
+                                 blackIMG="resources/Images/MASK.png" dollIMG="resources/Images/CHAR1.png"
                                  width="600.0" BorderPane.alignment="CENTER" onMouseClicked="#mouseClicked" onMouseDragged="#mouseDragged"/>
             </children>
             <padding>
@@ -50,11 +50,6 @@
                         <MenuItem mnemonicParsing="false" onAction="#Properties" text="Properties" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" onAction="#Exit" text="Exit">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#Exit" text="Quit Game" />
-                    </items>
-                </Menu>
                 <Menu mnemonicParsing="false" onAction="#Help" text="Help">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#Help" text="Instactions" />
@@ -65,13 +60,18 @@
                         <MenuItem mnemonicParsing="false" onAction="#About" text="info" />
                     </items>
                 </Menu>
+                <Menu mnemonicParsing="false" onAction="#Exit" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#Exit" text="Quit Game" />
+                    </items>
+                </Menu>
             </menus>
         </MenuBar>
     </top>
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-             <Label layoutX="3.0" text="Player row:">
+             <Label layoutX="2.0" layoutY="3.0" text="Player row:">
                <font>
                   <Font name="Stencil" size="18.0" />
                </font></Label>
@@ -79,16 +79,16 @@
                <font>
                   <Font name="Stencil" size="18.0" />
                </font></Label>
-             <Label fx:id="lbl_playerRow" layoutX="171.0" layoutY="34.0" prefHeight="17.0" prefWidth="21.0" text="#">
+             <Label fx:id="lbl_playerRow" layoutX="138.0" layoutY="1.0" prefHeight="26.0" prefWidth="32.0" text="#">
                <font>
                   <Font name="Stencil" size="20.0" />
                </font></Label>
-             <Label fx:id="lbl_playerColumn" layoutX="139.0" layoutY="-4.0" text="#">
+             <Label fx:id="lbl_playerColumn" layoutX="164.0" layoutY="34.0" prefHeight="26.0" prefWidth="27.0" text="#">
                <font>
                   <Font name="Stencil" size="20.0" />
                </font></Label>
 
-             <Button fx:id="solve" layoutX="-19.0" layoutY="58.0" mnemonicParsing="false" onAction="#solveMaze" style="-fx-background-color: transparent; -fx-cursor: hover;" stylesheets="@ViewStyle.css" text="solve" textFill="#441ec7f7" underline="true">
+             <Button fx:id="solve" layoutX="-11.0" layoutY="66.0" mnemonicParsing="false" onAction="#solveMaze" style="-fx-background-color: transparent; -fx-cursor: hover;" stylesheets="@ViewStyle.css" text="solve" textFill="#441ec7f7" underline="true">
                   <font>
                       <Font name="Stencil" size="33.0" />
                   </font>
@@ -96,16 +96,19 @@
                       <Cursor fx:constant="HAND" />
                   </cursor>
             </Button>
-            <ImageView fitHeight="286.0" fitWidth="199.0" layoutX="2.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="370.0" fitWidth="178.0" layoutX="5.0" layoutY="168.0" pickOnBounds="true" smooth="false">
                <image>
-                  <Image url="@../Images/logoo.png" />
+                  <Image url="@../../resources/Images/ING.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="412.0" fitWidth="150.0" layoutX="26.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/pp.png" />
-               </image>
-            </ImageView>
+            <Button layoutX="-14.0" layoutY="122.0" mnemonicParsing="false" onAction="#mute" prefHeight="37.0" prefWidth="146.0" style="-fx-background-color: transparent; -fx-cursor: hover;" stylesheets="@ViewStyle.css" text="MUTE" textFill="#441ec7f7" underline="true">
+               <font>
+                  <Font name="Stencil" size="1.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </AnchorPane>
    </left>

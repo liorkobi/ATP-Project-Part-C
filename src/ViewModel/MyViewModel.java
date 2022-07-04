@@ -4,8 +4,6 @@ package ViewModel;
 import Model.IModel;
 import Model.MyModel;
 import View.IView;
-import algorithms.mazeGenerators.Position;
-import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.input.KeyCode;
@@ -21,7 +19,7 @@ public class MyViewModel extends Observable implements Observer{
     int playerPosColIdx;
     public StringProperty spPlayerPosRow = new SimpleStringProperty();
     public StringProperty spPlayerPosCol = new SimpleStringProperty();
-    int[][] emptyM;
+    public int[][] emptyM;
     public static boolean empty;
     int Re;
     int Ce;
@@ -42,7 +40,6 @@ public class MyViewModel extends Observable implements Observer{
 
 
     public boolean validateMazeGenerationParams(int rows, int columns) {
-        //what about letters??!?!?!
 
         if(rows<=2 || columns <= 2){
             return false;
@@ -61,6 +58,7 @@ public class MyViewModel extends Observable implements Observer{
             if (a.equals("generated")) {
                 //UPDATE VIEW
                 setChanged();
+                updateRowsAndCols();
                 notifyObservers("generated");
 
             }
@@ -109,7 +107,7 @@ public class MyViewModel extends Observable implements Observer{
 
 
     private void updateRowsAndCols(){
-         playerPosRowIdx = M.getPlayerRowIdx();
+        playerPosRowIdx = M.getPlayerRowIdx();
         playerPosColIdx = M.getPlayerColIdx();
         spPlayerPosRow.set(playerPosRowIdx + "");
         spPlayerPosCol.set(playerPosColIdx + "");
@@ -166,21 +164,31 @@ public class MyViewModel extends Observable implements Observer{
 
 
     public int getSrowE() {
-        return chooseR(Re);
+        int a= chooseR(Re);
+        M.setPlayerRowIdx(a);
+        playerPosRowIdx=a;
+        return a;
     }
+
     public int getErowE() {
         return chooseR(Re);
     }
     public int getEcolE() {
         return chooseR(Ce);
     }
+
+
     public int getScolE() {
-        return chooseR(Ce);
+        int a= chooseR(Ce);
+        M.setPlayerColIdx(a);
+        playerPosColIdx=a;
+        return a;
     }
 
     public int[][] getMazeE() {
         return emptyM;
     }
+
 
 
 

@@ -8,14 +8,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class MazeDisplayer extends Canvas {
@@ -24,6 +24,8 @@ public class MazeDisplayer extends Canvas {
     private int col_player =0;
     private int[][] maze;
     public MyViewModel MYVM;
+    public static boolean win=false;
+    public static MediaPlayer mediaPlayer;
 
     StringProperty imageFileNameWall = new SimpleStringProperty();
 //    StringProperty imageFileNamePlayer = new SimpleStringProperty();
@@ -31,6 +33,28 @@ public class MazeDisplayer extends Canvas {
     StringProperty imageFileNameWIN = new SimpleStringProperty();
     StringProperty imageFileNameSolution = new SimpleStringProperty();
 
+    public static void audioChooser(int i) {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.pause();
+        }
+        String path = "";
+        if (i == 3) {
+            path = "resources/mp3/welcom.mp3";
+        }
+        else if (i == 1) {
+            path = "resources/mp3/maze.mp3";
+//            winnerCounter = 0;
+        }
+        else if (i == 2) {
+            path = "resources/mp3/win.mp3";
+        }
+        //Media player = new Media(Paths.get(path).toUri().toString());
+        Media player = new Media(new File(path).toURI().toString());
+        mediaPlayer = new MediaPlayer(player);
+        mediaPlayer.play();
+        mediaPlayer.setMute(MyViewController.mute);
+    }
 
 
     public String getTsoliderIMG() {
@@ -97,26 +121,6 @@ public class MazeDisplayer extends Canvas {
         return imageFileNameWIN.get();
     }
     public void setImageFileNameWIN(String imageFileNameWIN) { this.imageFileNameWIN.set(imageFileNameWIN);}
-
-    //CIRCLE SOLIDER PLAYER
-//    public String getblackIMG() { return imageFileNameBlack.get(); }
-//    public void setblackIMG(String blackIMG) { this.imageFileNameBlack.set(blackIMG);}
-
-    //BLACK IMAGE
-//    public String getCsoliderIMG() { return CsoliderIMG.get(); }
-//    public void setCsoliderIMG(String CsoliderIMG) { this.CsoliderIMG.set(CsoliderIMG);}
-//
-//    //SQUARE SOLIDER PLAYER
-//    public String getSsoliderIMG() { return SsoliderIMG.get(); }
-//    public void setSsoliderIMG(String SsoliderIMG) { this.SsoliderIMG.set(SsoliderIMG);}
-
-    //DOLL IMAGE
-//    public String getdollIMG() { return dollIMG.get(); }
-//    public void setdollIMG(String dollIMG) { this. dollIMG.set(dollIMG);}
-//
-//    //TRIANGLE SOLIDER PLAYER
-//    public String getTsoliderIMG() { return  TsoliderIMG.get(); }
-//    public void setTsoliderIMG(String TsoliderIMG) { this.TsoliderIMG.set(TsoliderIMG); }
 
     //WALL IMAGE
     public String getImageFileNameWall() { return imageFileNameWall.get(); }
@@ -191,15 +195,12 @@ public void draw()
 //place the player
         double h_player = getRow_player() * cellHeight;
         double w_player = getCol_player() * cellWidth;
-//        Image playerImage = null;
-//        try {
-//            playerImage = new Image(new FileInputStream(getImageFileNamePlayer()));
-//        } catch (FileNotFoundException e) {
-//            System.out.println("There is no Image player....");
-//        }
+
         graphicsContext.drawImage(playerImage,w_player,h_player,cellWidth,cellHeight);
-        if (getRow_player() == getRow_exit() && getCol_player() == getCol_exit()) {
+        if (getRow_player() == getRow_exit() && getCol_player() == getCol_exit() && win==false) {
+            win=true;
             showStageForUserWinningTheGame("You Are The Winner");
+
         }
  //place the exit p
 
@@ -216,11 +217,11 @@ public void draw()
     }
 }
 
-    private double getCol_player() {
+    double getCol_player() {
         return col_player;
     }
 
-    private double getRow_player() {
+    double getRow_player() {
         return row_player;
     }
 
@@ -256,13 +257,17 @@ public void draw()
         FXMLLoader winFXML = new FXMLLoader(getClass().getResource("/View/Win.fxml"));
         Parent root = winFXML.load();
         WinController winController = winFXML.getController();
-//            newfile=newController;
+
+        winController.setd(maze.length,maze[0].length);
+
         winController.setMYVM(MYVM);
+
         winController.setStage(stage);
-        Scene scene = new Scene(root, 700, 700);
+        Scene scene = new Scene(root, 900, 600);
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
+        audioChooser(2);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -415,6 +420,10 @@ public void draw()
     public void setMYVM(MyViewModel myvm) {
         this.MYVM = myvm;
     }
+    public static void stopMusic(){
+        mediaPlayer.setMute(MyViewController.mute);
+    }
+
 }
 
 

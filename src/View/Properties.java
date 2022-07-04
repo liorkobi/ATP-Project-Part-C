@@ -30,7 +30,7 @@ public class Properties implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources){
         generator.getItems().addAll("EmptyMazeGenerator","SimpleMazeGenerator","MyMazeGenerator");
-        searchingAlgorithm.getItems().addAll("Breadth","DFS", "BestFirstSearch");
+        searchingAlgorithm.getItems().addAll("BreadthFirstSearch","DepthFirstSearch", "BestFirstSearch");
         try{
             Configurations properties = Configurations.getInstance();
 //            properties.getval(new FileInputStream("resources/config.properties"));
@@ -39,10 +39,10 @@ public class Properties implements Initializable {
             String a2= properties.getval("mazeGeneratingAlgorithm");
             if(a1.equals("BestFirstSearch")){
                 searchingAlgorithm.setValue("BestFirstSearch");}
-            else if(a1.equals("DFS")){
-                searchingAlgorithm.setValue("DFS");}
-            else if(a1.equals("Breadth")){
-                searchingAlgorithm.setValue("Breadth");}
+            else if(a1.equals("DepthFirstSearch")){
+                searchingAlgorithm.setValue("DepthFirstSearch");}
+            else if(a1.equals("BreadthFirstSearch")){
+                searchingAlgorithm.setValue("BreadthFirstSearch");}
             if(a2.equals("MyMazeGenerator")){
                 generator.setValue("MyMazeGenerator");}
             else if(a2.equals("SimpleMazeGenerator")){
@@ -60,17 +60,27 @@ public class Properties implements Initializable {
     public void UpdateClicked() throws Exception {
 
         Configurations properties = Configurations.getInstance();
+        String a1= properties.getval("mazeSearchingAlgorithm");
+//        String a3 = null;
+//
+//        if(a1.equals("BestFirstSearch")) {
+//            a3="BestFirstSearch";}
+//        else if(a1.equals("DepthFirstSearch")){
+//            a3="DFS";}
+//        else if(a1.equals("BreadthFirstSearch")){
+//            a3="Breadth";}
+
         properties.setProperty("mazeGeneratingAlgorithm",generator.getValue());
         properties.setProperty("mazeSearchingAlgorithm",searchingAlgorithm.getValue());
-        System.out.println("updated");
+//        a3=searchingAlgorithm.getValue();
         if (generator.getValue().equals("EmptyMazeGenerator")){
             newFile.empty=true;
-
         }
         else{
-            newFile.empty=false;
+            newFile.SETempty(false);
+
     }
-        newfile.generateForUpdate();
+        newfile.generate();
         stage.close();
     }
 }
