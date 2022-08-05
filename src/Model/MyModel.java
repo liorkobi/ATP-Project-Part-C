@@ -107,6 +107,7 @@ public class MyModel extends Observable implements IModel {
                         InputStream decompressorIS = new MyDecompressorInputStream(new ByteArrayInputStream(compressedMaze));
                         byte[] decompressedMaze = new byte[1000000];//todo consider these dims: byte[numOfRows * numOfCols + 12] - logically no reason it won't be the size
                         /*Fill decompressedMaze with bytes*/
+
                         decompressorIS.read(decompressedMaze);
                         /*create new Maze */
                         Maze newMaze = new Maze(decompressedMaze);
@@ -138,7 +139,7 @@ public class MyModel extends Observable implements IModel {
                         toServer.flush();
                         toServer.writeObject(maze);
                         toServer.flush();
-                        Solution mazeSolution = (Solution) fromServer.readObject();//do something with the solution
+                        Solution mazeSolution = (Solution) fromServer.readObject();
                         /*update solution so that mazeDisplayer can use getter to take it*/
                         solution = mazeSolution;
                     } catch (Exception e) {

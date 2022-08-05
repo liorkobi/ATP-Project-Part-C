@@ -21,17 +21,16 @@ public interface IModel {
     int getEcol();
     void movePlayerModelLogic(KeyCode direction);
     void movePlayerModelLogicE(KeyCode direction);
-    public int getPlayerRowIdx();
+     int getPlayerRowIdx();
     void setemptyM(int r, int c);
 
-    public void setPlayerRowIdx(int playerRowIdx);
+     void setPlayerRowIdx(int playerRowIdx);
 
-    public int getPlayerColIdx();
+     int getPlayerColIdx();
 
-    public void setPlayerColIdx(int playerColIdx);
+     void setPlayerColIdx(int playerColIdx);
 
-//    public boolean isPlayerAtGoalPosition();
-public void solveMaze();
+     void solveMaze();
 
     ArrayList<int[]> getSolution();
 
@@ -39,5 +38,4 @@ public void solveMaze();
 
     void loadGame(File loadfile) throws IOException, ClassNotFoundException;
     void exit();
-//    public void loadMaze(File file);
 }

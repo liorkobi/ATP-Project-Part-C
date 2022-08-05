@@ -34,6 +34,8 @@ public class MyViewController  implements IView , Observer {
      newFile newfile;
     public boolean empty;
     public static boolean mute=false;
+    public javafx.scene.control.Button muteB;
+
 
     @FXML
     public Pane pane;
@@ -59,7 +61,7 @@ public class MyViewController  implements IView , Observer {
     public TextField txtfld_colsNum;
 
         @FXML
-        void About(ActionEvent event) {
+        public void About(ActionEvent event) {
             try {
                 Stage stage = new Stage();
                 stage.setTitle("About");
@@ -74,7 +76,7 @@ public class MyViewController  implements IView , Observer {
         }
 
         @FXML
-        void Exit(ActionEvent event) throws IOException {
+        public void Exit(ActionEvent event) throws IOException {
             stopServers();
             System.exit(0);
 
@@ -83,9 +85,7 @@ public class MyViewController  implements IView , Observer {
 
 
         @FXML
-        void newfile(ActionEvent event) throws IOException {
-//            MazeDisplayer.mediaPlayer.stop();
-//            newFile.setMV(MYVM);
+        public void newfile(ActionEvent event) throws IOException {
             Stage stage = new Stage();
             stage.setTitle("NewFile");
             FXMLLoader newFXML = new FXMLLoader(getClass().getResource("/View/newfile.fxml"));
@@ -102,7 +102,7 @@ public class MyViewController  implements IView , Observer {
 
 
         @FXML
-        void Help(ActionEvent event) {
+        public void Help(ActionEvent event) {
             try {
                 Stage stage = new Stage();
                 stage.setTitle("Help");
@@ -250,16 +250,7 @@ public void savefile(ActionEvent e) throws IOException{
         MazeDisplayer.getUserChoiceOfPlayer(s);
 
     }
-    public void updateProp() throws Exception {
-//        MazeDisplayer.setCol_player(MYVM.getScol());
-//        MazeDisplayer.setRow_player(MYVM.getSrow());
-//        MazeDisplayer.placeEr(MYVM.getErow());
-//        MazeDisplayer.placeEc(MYVM.getEcol());
-//        MazeDisplayer.drawm(MYVM.getMaze());
-//        bindProperties(MYVM);
-//        this.playerPosRow.set(MYVM.getPlayerPosRowIdx() + "");
-//        this.playerPosCol.set(MYVM.getPlayerPosColIdx() + "");
-    }
+
     public void stopServers(){
             MYVM.stopServers();
     }
@@ -331,8 +322,11 @@ public void savefile(ActionEvent e) throws IOException{
     public  void mute(){
         if(mute){
             mute = false;
+            muteB.setText("MUTE");
         }
         else{ mute = true;
+            muteB.setText("UNMUTE");
+
         }
         View.MazeDisplayer.stopMusic();
     }

@@ -60,7 +60,7 @@ public class Properties implements Initializable {
     public void UpdateClicked() throws Exception {
 
         Configurations properties = Configurations.getInstance();
-        String a1= properties.getval("mazeSearchingAlgorithm");
+        //String a1= properties.getval("mazeSearchingAlgorithm");
 //        String a3 = null;
 //
 //        if(a1.equals("BestFirstSearch")) {

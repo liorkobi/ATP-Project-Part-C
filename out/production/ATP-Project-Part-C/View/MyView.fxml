@@ -52,7 +52,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" onAction="#Help" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#Help" text="Instactions" />
+                        <MenuItem mnemonicParsing="false" onAction="#Help" text="Instruction" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="About">
@@ -88,7 +88,7 @@
                   <Font name="Stencil" size="20.0" />
                </font></Label>
 
-             <Button fx:id="solve" layoutX="-11.0" layoutY="66.0" mnemonicParsing="false" onAction="#solveMaze" style="-fx-background-color: transparent; -fx-cursor: hover;" stylesheets="@ViewStyle.css" text="solve" textFill="#441ec7f7" underline="true">
+             <Button fx:id="solve" layoutX="-11.0" layoutY="66.0" mnemonicParsing="false" onAction="#solveMaze" prefHeight="63.0" prefWidth="214.0" style="-fx-background-color: transparent; -fx-cursor: hover;" stylesheets="@ViewStyle.css" text="solve" textFill="#441ec7f7" underline="true">
                   <font>
                       <Font name="Stencil" size="33.0" />
                   </font>
@@ -98,10 +98,10 @@
             </Button>
             <ImageView fitHeight="370.0" fitWidth="178.0" layoutX="5.0" layoutY="168.0" pickOnBounds="true" smooth="false">
                <image>
-                  <Image url="@../../resources/Images/ING.png" />
+                  <Image url="@/Images/ING.png" />
                </image>
             </ImageView>
-            <Button layoutX="-14.0" layoutY="122.0" mnemonicParsing="false" onAction="#mute" prefHeight="37.0" prefWidth="146.0" style="-fx-background-color: transparent; -fx-cursor: hover;" stylesheets="@ViewStyle.css" text="MUTE" textFill="#441ec7f7" underline="true">
+            <Button fx:id="muteB" layoutX="-6.0" layoutY="122.0" mnemonicParsing="false" onAction="#mute" prefHeight="63.0" prefWidth="199.0" style="-fx-background-color: transparent; -fx-cursor: hover;" stylesheets="@ViewStyle.css" text="MUTE" textFill="#441ec7f7" underline="true">
                <font>
                   <Font name="Stencil" size="1.0" />
                </font>
